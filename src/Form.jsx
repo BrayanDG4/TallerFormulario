@@ -23,23 +23,22 @@ const Form = () => {
                 </div>
 
                 <div className="mb-5">
+                    <select className="mb-2 block text-gray-500 font-bold w-full p-3 rounded" name="genderBox" id="genderBox">
+                        <option value="Femenino" selected>Femenino</option>
+                        <option value="Masculino">Másculino</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div className="mb-5 hidden">
                     <label for='gender' className="mb-2 block uppercase text-gray-500 font-bold">
                         Género:
                     </label>
 
-                    <input name="gender" type="gender" id="email" placeholder="Género" 
+                    <input name="gender" type="text" id="gender" placeholder="Género" 
                     className="border p-3 w-full rounded-lg"/>
                 </div>
-
-                <div className="mb-5">
-                    <select className="mb-2 block text-gray-500 font-bold width" name="gender" id="gender">
-                        <option value="Femenino" selected>Femenino</option>
-                        <option value="Masculino">Másculino</option>
-                        <option value="otro"></option>
-                    </select>
-                </div>
                 
-
                 <div className="mb-5">
                     <label for='password' className="mb-2 block uppercase text-gray-500 font-bold">
                         Contraseña:
