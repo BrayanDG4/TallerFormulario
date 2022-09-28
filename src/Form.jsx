@@ -6,7 +6,34 @@ const Form = () => {
 
     console.log(selectedDate);
 
+    const [isVisible, setIsVisible] = useState({
+        otherGender: false,
+        maritalState: false,
+    });
 
+    const gender = (event) =>{
+        if (document.getElementById('other').selected == true) {
+            setIsVisible({
+                ...isVisible, otherGender: true
+            });
+        } else{
+            setIsVisible({
+                ...isVisible, otherGender: false
+            });
+        }
+    }
+
+    const marital = (event) =>{
+        if (document.getElementById('maritalStatus').selected == true) {
+            setIsVisible({
+                ...isVisible, maritalState: true
+            });
+        } else{
+            setIsVisible({
+                ...isVisible, maritalState: false
+            });
+        }
+    }
 
   return (
     //codigo del formulario
@@ -37,21 +64,26 @@ const Form = () => {
                         Género:
                     </label>
 
-                    <select className="mb-2 block text-gray-500 font-bold w-full p-3 rounded" name="genderBox" id="genderBox">
+                    <select onChange={gender} className="mb-2 block text-gray-500 font-bold w-full p-3 rounded" name="genderBox" id="genderBox">
                         <option value="Femenino" selected>Femenino</option>
                         <option value="Masculino">Másculino</option>
-                        <option value="otro">Otro</option>
+                        <option id="other" value="otro">Otro</option>
                     </select>
                 </div>
                 {/* OTRO GENERO*/}
-                <div className="mb-5">
-                    <label for='gender' className="mb-2 block uppercase text-gray-500 font-bold">
+                {
+                    isVisible.otherGender && (
+                        <div id="otherGender" className="mb-5">
+                        <label for='gender' className="mb-2 block uppercase text-gray-500 font-bold">
                         Otro género:
-                    </label>
+                        </label>
 
-                    <input name="gender" type="text" id="gender" placeholder="Género" 
-                    className="border p-3 w-full rounded-lg"/>
-                </div>
+                        <input name="gender" type="text" id="gender" placeholder="Género" 
+                        className="border p-3 w-full rounded-lg"/>
+                        </div>
+                    )
+                }
+                
                 {/* FECHA */}
                 <div className="mb-5">
                     <label for='date' className="mb-2 block uppercase text-gray-500 font-bold">
@@ -66,21 +98,24 @@ const Form = () => {
                         Estado civil:
                     </label>
 
-                    <select className="mb-2 block text-gray-500 font-bold w-full p-3 rounded" name="maritalStatus" id="maritalStatus">
+                    <select onChange={marital} className="mb-2 block text-gray-500 font-bold w-full p-3 rounded" name="maritalStatus">
                         <option value="Femenino" selected>Soltero</option>
                         <option value="Masculino">Casado</option>
-                        <option value="union-libre">Unión libre</option>
+                        <option id="maritalStatus" value="union-libre">Unión libre</option>
                     </select>
                 </div>
-                {/* CONGUYE */}
-                <div className="mb-5">
-                    <label for='partner' className="mb-2 block uppercase text-gray-500 font-bold">
-                        Nombre de Cónguye:
-                    </label>
+                {
+                    isVisible.maritalState &&(
+                        <div className="mb-5">
+                            <label for='partner' className="mb-2 block uppercase text-gray-500 font-bold">
+                                Nombre de Cónyuge:
+                            </label>
 
-                    <input name="partner" type="text" id="partner" placeholder="Nombre de cónguye" 
-                    className="border p-3 w-full rounded-lg"/>
-                </div>
+                            <input name="partner" type="text" id="partner" placeholder="Nombre de cónyuge" 
+                            className="border p-3 w-full rounded-lg"/>
+                        </div>
+                    )
+                } 
 
                 {/* HIJOS */}
                 <div className="mb-5">
