@@ -1,3 +1,5 @@
+import React, { Component }  from 'react';
+
 const NavBar = () => {
   return (
     <header className="p-5 border-b bg-white shadow">

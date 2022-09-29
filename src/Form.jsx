@@ -1,15 +1,34 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect, Children} from 'react';
 import { DatePicker } from "@material-ui/pickers"
+import Hijos from './Hijos';
 
 const Form = () => {
     const [selectedDate, changeSelectedDate] = useState(new Date());
 
     console.log(selectedDate);
 
+    const numberChildren = useRef(null); //Mi etiqueta la guardo en la variable
+
     const [isVisible, setIsVisible] = useState({
         otherGender: false,
         maritalState: false,
     });
+
+    let renderChildren = <></>;
+
+    const [Children, setChildren] = useState([]);
+
+    const GenerateChildren = () => {
+
+        setChildren([])
+
+        for (let index = 0; index < numberChildren.current.value; index++) {
+            setChildren([...Children, {
+                nombreHijo: "",
+                edadHijo: ""
+            }])
+        }
+    }
 
     const gender = (event) =>{
         if (document.getElementById('other').selected == true) {
@@ -123,9 +142,17 @@ const Form = () => {
                         Número de hijos:
                     </label>
 
-                    <input required name="sons" type="number" id="sons" placeholder="Número de hijos" 
+                    <input ref={numberChildren} onChange={GenerateChildren} required name="sons" type="number" id="sons" placeholder="Número de hijos"
                     className="border p-3 w-full rounded-lg invalid:border-pink-500"/>
                 </div>
+
+                {
+                    Children.map((value, index) => {
+                        // return <Hijos state={Children} setState={setChildren}/>
+                        return <Hijos/>
+                    })
+                }
+
                 {/* TRABAJO ACTUAL */}
                 <div className="mb-5">
                     <label for='currentJob' className="mb-2 block uppercase text-gray-500 font-bold">
