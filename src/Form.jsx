@@ -12,6 +12,7 @@ const Form = () => {
     const [isVisible, setIsVisible] = useState({
         otherGender: false,
         maritalState: false,
+        company: false,
     });
 
     let renderChildren = <></>;
@@ -50,6 +51,18 @@ const Form = () => {
         } else{
             setIsVisible({
                 ...isVisible, maritalState: false
+            });
+        }
+    }
+
+    const company = (event) =>{
+        if (document.getElementById('otherCompany').selected == true) {
+            setIsVisible({
+                ...isVisible, company: true
+            });
+        } else{
+            setIsVisible({
+                ...isVisible, company: false
             });
         }
     }
@@ -142,8 +155,8 @@ const Form = () => {
                         Número de hijos:
                     </label>
 
-                    <input ref={numberChildren} onChange={GenerateChildren} required name="sons" type="number" id="sons" placeholder="Número de hijos"
-                    className="border p-3 w-full rounded-lg invalid:border-pink-500"/>
+                    <input ref={numberChildren} onChange={GenerateChildren} name="sons" type="number" id="sons" placeholder="Número de hijos"
+                    required className="border p-3 w-full rounded-lg invalid:border-pink-500"/>
                 </div>
 
                 {
@@ -159,20 +172,41 @@ const Form = () => {
                         ¿Trabaja actualmente?:
                     </label>
 
-                    <select className="mb-2 block text-gray-500 font-bold w-full p-3 rounded" name="currentJob" id="currentJob">
-                        <option value="si">Si</option>
+                    <select onChange={company} className="mb-2 block text-gray-500 font-bold w-full p-3 rounded" name="currentJob" id="currentJob">
                         <option value="no">No</option>
+                        <option id='otherCompany' value="si">Si</option>
                     </select>
                 </div>
                 {/* NOMBRE DE LA EMPRESA */}
+                
+                {
+                    isVisible.company &&(
+                        <div className="mb-5">
+                            <label for='company' class="mb-2 block uppercase text-gray-500 font-bold after:content-['*'] after:ml-0.5 after:text-red-500">
+                                Nombre de la empresa:
+                            </label>
+
+                            <input required name="company" type="number" id="sons" placeholder="Nombre de la empresa" 
+                            className="border p-3 w-full rounded-lg invalid:border-pink-500"/>
+                        </div>
+                    )
+                }
+
+                {/* ESTRATO */}
                 <div className="mb-5">
-                    <label for='company' class="mb-2 block uppercase text-gray-500 font-bold after:content-['*'] after:ml-0.5 after:text-red-500">
-                        Nombre de la empresa:
+                    <label for='stratum' className="mb-2 block uppercase text-gray-500 font-bold">
+                        Estrato social:
                     </label>
 
-                    <input required name="company" type="number" id="sons" placeholder="Nombre de la empresa" 
-                    className="border p-3 w-full rounded-lg invalid:border-pink-500"/>
+                    <select className="mb-2 block text-gray-500 font-bold w-full p-3 rounded" name="stratum" id="stratum">
+                        <option value=""></option>
+                        <option value=""></option>
+                    </select>
                 </div>
+                
+
+
+                
 
                 <input 
                     type="submit"
