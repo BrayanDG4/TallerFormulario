@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Form from './Form';
+import Delete from './Delete';
+import Modify from './Modify';
 import App from './App'
 import Carousel from './Carousel';
 import Layout from './containers/Layout';
@@ -14,6 +16,8 @@ root.render(
       <BrowserRouter basename='/'>
         <Routes>
           <Route exact path="/form" element={<Form/>} />
+          <Route exact path="/delete" element={<Delete/>} />
+          <Route exact path="/modify" element={<Modify/>} />
         </Routes>
       </BrowserRouter>
       
