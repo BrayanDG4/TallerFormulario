@@ -178,7 +178,7 @@ const Form = () => {
                                 <label for='date' className="mb-2 block uppercase text-gray-500 font-bold">
                                         Nombre del Acudiente:
                                 </label>
-                                <input required name="name" type="number" id="text" placeholder="" 
+                                <input required name="name" type="text" id="text" placeholder="" 
                                 className="border p-3 w-full rounded-lg invalid:border-pink-500"/>
                             </div>
 

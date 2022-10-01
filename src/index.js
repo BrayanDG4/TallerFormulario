@@ -1,18 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import NavBar from './NavBar';
 import Form from './Form';
-import SideNavBar from './SideNavBar';
 import App from './App'
 import Carousel from './Carousel';
+import Layout from './containers/Layout';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <NavBar/>
-    <SideNavBar/>
-    <Form/>
+    <Layout>
+      <BrowserRouter basename='/'>
+        <Routes>
+          <Route exact path="/form" element={<Form/>} />
+        </Routes>
+      </BrowserRouter>
+      
+    </Layout>
+    
   </React.StrictMode>
 );
 
