@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import NavBar from './NavBar';
-import Form from './Form';;
+import Form from './Form';
+import SideNavBar from './SideNavBar';
+import App from './App'
+import Carousel from './Carousel';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <NavBar/>
+    <SideNavBar/>
     <Form/>
   </React.StrictMode>
 );
