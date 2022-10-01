@@ -1,9 +1,10 @@
 import React, {useState, useRef, useEffect, Children} from 'react';
-import { DatePicker } from "@material-ui/pickers"
 import Hijos from './Hijos';
 
 const Form = () => {
     const [selectedDate, changeSelectedDate] = useState(new Date());
+
+    const [edad, setEdad] = useState(0);
 
     console.log(selectedDate);
 
@@ -13,22 +14,38 @@ const Form = () => {
         otherGender: false,
         maritalState: false,
         company: false,
+        Enrollment: false,
     });
 
-    let renderChildren = <></>;
+    // calcular edad
+    const handleChangeDate = (event) => {
+        let hoy = new Date();
+        let fechaNacimiento = new Date(event.target.value);
+        let _edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+        let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth();
+        if (
+            diferenciaMeses < 0 ||
+            (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
+        ) {
+            _edad--;
+        }
+
+        setEdad(_edad)
+    }
 
     const [Children, setChildren] = useState([]);
 
     const GenerateChildren = () => {
-
-        setChildren([])
-
+        let temp = [];
         for (let index = 0; index < numberChildren.current.value; index++) {
-            setChildren([...Children, {
+
+            temp[index] = {
+                id: index,
                 nombreHijo: "",
                 edadHijo: ""
-            }])
+            }
         }
+        setChildren(temp);
     }
 
     const gender = (event) =>{
@@ -39,6 +56,20 @@ const Form = () => {
         } else{
             setIsVisible({
                 ...isVisible, otherGender: false
+            });
+        }
+    }
+
+    //Si es estrato 1 o 2 el estudiante tiene derecho a matricula cero
+
+    const zeroEnrollment = (event) => {
+        if(document.getElementById('enrollment').value == 1 || document.getElementById('enrollment').value == 2){
+            setIsVisible({
+                ...isVisible, Enrollment: true
+            });
+        } else{
+            setIsVisible({
+                ...isVisible, Enrollment: false
             });
         }
     }
@@ -121,9 +152,48 @@ const Form = () => {
                     <label for='date' className="mb-2 block uppercase text-gray-500 font-bold">
                         Fecha:
                     </label>
+                    <div class="datepicker relative form-floating mb-3 xl:w-96" data-mdb-toggle-button="false">
+                        <input className="border p-3 w-full rounded-lg invalid:border-pink-500" type="date"
+                        onChange={handleChangeDate}
+                        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        placeholder="Select a date" data-mdb-toggle="datepicker" />
+                    
+                    </div>                    
+                
                     {/* IMPLEMENTAR ESTADO useState */}
-                    <DatePicker value={selectedDate} onChange={changeSelectedDate} /> 
+                    {/* <DatePicker value={selectedDate} onChange={changeSelectedDate} />  */}
                 </div>
+                <div className='mb-5'>
+                    <label for='date' className="mb-2 block uppercase text-gray-500 font-bold">
+                            Edad:
+                    </label>
+                    <input required name="name" value={edad} disabled type="number" id="name" placeholder="" 
+                    className="border p-3 w-full rounded-lg invalid:border-pink-500"/>
+                </div>
+
+                {
+                    edad < 18 && (
+                        <>
+                            <div className='mb-5'>
+                                <label for='date' className="mb-2 block uppercase text-gray-500 font-bold">
+                                        Nombre del Acudiente:
+                                </label>
+                                <input required name="name" type="number" id="text" placeholder="" 
+                                className="border p-3 w-full rounded-lg invalid:border-pink-500"/>
+                            </div>
+
+                            <div className='mb-5'>
+                                <label for='date' className="mb-2 block uppercase text-gray-500 font-bold">
+                                        Telefono Acudiente:
+                                </label>
+                                <input required name="name" type="number" id="name" placeholder="" 
+                                className="border p-3 w-full rounded-lg invalid:border-pink-500"/>
+                            </div>
+                        </>
+
+                    )
+                }
+                
                 {/* ESTDADO CIVIL */}
                 <div className="mb-5">
                     <label for='maritalStatus' className="mb-2 block uppercase text-gray-500 font-bold">
@@ -155,14 +225,20 @@ const Form = () => {
                         Número de hijos:
                     </label>
 
-                    <input ref={numberChildren} onChange={GenerateChildren} name="sons" type="number" id="sons" placeholder="Número de hijos"
+                    <input min="1" max="5" ref={numberChildren} onChange={GenerateChildren} name="sons" type="number" id="sons" placeholder="Número de hijos"
                     required className="border p-3 w-full rounded-lg invalid:border-pink-500"/>
                 </div>
-
+                
                 {
                     Children.map((value, index) => {
+                        
                         // return <Hijos state={Children} setState={setChildren}/>
-                        return <Hijos/>
+                        return (
+                            <>
+                                <p>{Children[index].nombreHijo}</p>
+                                <Hijos Children={Children} index={index}/>
+                            </>
+                        )
                     })
                 }
 
@@ -198,16 +274,18 @@ const Form = () => {
                         Estrato social:
                     </label>
 
-                    <select className="mb-2 block text-gray-500 font-bold w-full p-3 rounded" name="stratum" id="stratum">
-                        <option value=""></option>
-                        <option value=""></option>
-                    </select>
+                    <input min="1" max="6"  onChange={zeroEnrollment} name="enrollment" type="number" id="enrollment" placeholder="Estrato"
+                    required className="border p-3 w-full rounded-lg invalid:border-pink-500"/>
                 </div>
+
+                {
+                    isVisible.Enrollment && (
+                        <label htmlFor="Enrollment">
+                            Usted tiene derecho a matricula cero.
+                        </label>
+                    )
+                }
                 
-
-
-                
-
                 <input 
                     type="submit"
                     value="crearCuenta"

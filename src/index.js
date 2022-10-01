@@ -1,18 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import NavBar from './NavBar';
-import Form from './Form';
-import './index.css';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
+import Form from './Form';;
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <NavBar/>
-      <Form/>
-    </MuiPickersUtilsProvider>
+    <Form/>
   </React.StrictMode>
 );
 

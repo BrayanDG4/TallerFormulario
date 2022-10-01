@@ -1,6 +1,10 @@
 import React from "react";
 
-const Hijos = ({state, setState, index}) => {
+const Hijos = ({Children, index}) => {
+  const handleChange = (event) => {
+    console.log(event.target.value);
+    Children[index].nombreHijo = event.target.value;
+  }
   return (
     <div className="mb-5">
       <label
@@ -11,6 +15,7 @@ const Hijos = ({state, setState, index}) => {
       </label>
 
       <input
+        onChange={handleChange}
         required
         name="name"
         type="text"
