@@ -510,7 +510,7 @@ const Form = () => {
                     cursor-pointer uppercase font-bold w-full p-3 text-white rounded-md"
           /> */}
           <button
-            className="w-full bg-sky-600 text-white active:bg-sky-700 hover:bg-sky-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            className="w-full bg-green-600 text-white active:bg-green-700 hover:bg-green-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
             type="submit"
             value="Registrar"
             onClick={handleSubmit}
