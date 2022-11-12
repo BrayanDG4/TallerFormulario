@@ -6,6 +6,7 @@ import Modify from './Modify';
 import App from './App'
 import Carousel from './Carousel';
 import Layout from './containers/Layout';
+import Search from './search';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
@@ -18,6 +19,7 @@ root.render(
           <Route exact path="/form" element={<Form/>} />
           <Route exact path="/delete" element={<Delete/>} />
           <Route exact path="/modify" element={<Modify/>} />
+          <Route exact path="/search" element={<Search/>} />
         </Routes>
       </BrowserRouter>
       

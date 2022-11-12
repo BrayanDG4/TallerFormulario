@@ -32,7 +32,7 @@ const Modify = () => {
             // method="POST"
             >
     
-                <h1 class="text-center text-3xl font-bold text-red-500">Eliminar Usuario</h1>
+                <h1 class="text-center text-3xl font-bold text-red-500">Actualizar Usuario</h1>
                     
                     <div class="mb-5">
                         <label for='name' class="mb-2 block uppercase text-gray-500 font-bold">

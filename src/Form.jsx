@@ -6,6 +6,8 @@ const Form = () => {
   const [selectedDate, changeSelectedDate] = useState(new Date());
   const [showModal, setShowModal] = React.useState(false);
   const [edad, setEdad] = useState(0);
+  //datos
+  const documents = document.querySelector('#document');
 
   console.log(selectedDate);
 
@@ -116,13 +118,13 @@ const Form = () => {
     const formData = new FormData(form.current);
 
     for (let value of formData.values()) {
-      if(value == ""){
+      if (value == "") {
         setShowModal(false);
         return;
       }
     }
     setShowModal(true);
-  }
+  };
 
   // Cambiar departamentos
   const [municipios, setMunicipios] = useState([]);
@@ -130,6 +132,11 @@ const Form = () => {
     let id = event.target.value;
     setMunicipios(listMunicipios.data[id]);
   };
+
+  const sendData = (e) =>{
+    e.preventDefault();
+    console.log("Formulario enviado!")
+  }
 
   return (
     //codigo del formulario
@@ -407,10 +414,29 @@ const Form = () => {
               <input
                 required
                 name="company"
-                type="number"
-                id="sons"
+                type="text"
+                id="name-enterprise"
                 placeholder="Nombre de la empresa"
                 className="border p-3 w-full rounded-lg invalid:border-pink-500"
+              />
+
+              <label
+                for="company"
+                class="mb-2 block uppercase text-gray-500 font-bold after:content-['*'] after:ml-0.5 after:text-red-500"
+              >
+                Sueldo actual:
+              </label>
+
+              <input
+                min="0"
+                max="10000000"
+                required
+                name="company"
+                type="number"
+                id="money"
+                placeholder="Nombre de la empresa"
+                className="border p-3 w-full rounded-lg invalid:border-pink-500"
+                
               />
             </div>
           )}
@@ -447,10 +473,15 @@ const Form = () => {
             <label
               for="stratum"
               className="mb-2 block uppercase text-gray-500 font-bold"
-              >
-                Departamento
+            >
+              Departamento
             </label>
-            <select name="" id="departamentos" onChange={handleChangeDepart} className="border p-3 w-full rounded-lg invalid:border-pink-500">
+            <select
+              name=""
+              id="departamentos"
+              onChange={handleChangeDepart}
+              className="border p-3 w-full rounded-lg invalid:border-pink-500"
+            >
               <option value="-1">Seleccione...</option>
               <option value="0">AMAZONAS</option>
               <option value="1">ANTIOQUIA</option>
@@ -489,17 +520,23 @@ const Form = () => {
           </div>
           <div className="mb-5">
             <label
-                for="stratum"
-                className="mb-2 block uppercase text-gray-500 font-bold"
+              for="stratum"
+              className="mb-2 block uppercase text-gray-500 font-bold"
             >
               Municipio
             </label>
-            <select name="" id="municipios" className="border p-3 w-full rounded-lg invalid:border-pink-500">
-              {
-                municipios.map((municipio, index) => {
-                  return <option key={index} value={index}>{municipio}</option>
-                })
-              }
+            <select
+              name=""
+              id="municipios"
+              className="border p-3 w-full rounded-lg invalid:border-pink-500"
+            >
+              {municipios.map((municipio, index) => {
+                return (
+                  <option key={index} value={index}>
+                    {municipio}
+                  </option>
+                );
+              })}
             </select>
           </div>
 
@@ -528,7 +565,9 @@ const Form = () => {
                   <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                     {/*header*/}
                     <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                      <h3 className="text-3xl font-semibold">REGISTRO COMPLETO</h3>
+                      <h3 className="text-3xl font-semibold">
+                        REGISTRO COMPLETO
+                      </h3>
                       <button
                         className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                         onClick={() => setShowModal(false)}
@@ -541,7 +580,8 @@ const Form = () => {
                     {/*body*/}
                     <div className="relative p-6 flex-auto">
                       <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                        Te has registrado en nuestra plataforma, todo está protegido por el manual de terminos y condiciones.
+                        Te has registrado en nuestra plataforma, todo está
+                        protegido por el manual de terminos y condiciones.
                       </p>
                     </div>
                     {/*footer*/}
