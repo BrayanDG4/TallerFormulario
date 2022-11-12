@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, Children } from "react";
 import Hijos from "./Hijos";
 import listMunicipios from "./municipios";
+import {myForm,Formik} from 'formik';
 
 const Form = () => {
   const [selectedDate, changeSelectedDate] = useState(new Date());
@@ -137,9 +138,19 @@ const Form = () => {
     e.preventDefault();
     console.log("Formulario enviado!")
   }
-
+ 
   return (
-    //codigo del formulario
+    <Formik
+      initialValues={{
+        document: "",
+      }}
+      onSubmit = {(values)=>{
+        console.log(values)
+      }}
+    >
+      {({handleChange, handleSubmit}) => (
+<myForm onSubmit={handleSubmit}> 
+      {/* //codigo del formulario */}
     <div className="md:flex md:justify-center md:gap-10 md:items-center m-5">
       <div className="md:w-2/4 bg-white p-6 rounded-lg shadow-lg">
         <form action="" ref={form}>
@@ -154,6 +165,7 @@ const Form = () => {
 
             <input
               required
+              onChange={handleChange}
               name="document"
               type="text"
               id="document"
@@ -610,6 +622,10 @@ const Form = () => {
         </>
       </div>
     </div>
+      </myForm>
+      )}
+    </Formik>
+    
   );
 };
 
