@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, Children } from "react";
 import Hijos from "./Hijos";
 import listMunicipios from "./municipios";
 import {myForm,Formik} from 'formik';
+import {createTaskRequest} from './api/task.api.js';
 
 const Form = () => {
   const [selectedDate, changeSelectedDate] = useState(new Date());
@@ -144,8 +145,14 @@ const Form = () => {
       initialValues={{
         document: "",
       }}
-      onSubmit = {(values)=>{
-        console.log(values)
+      onSubmit = {async (values)=>{
+        console.log(values);
+        try {
+          const response = await createTaskRequest(values);
+          console.log(response);
+        } catch (error) {
+          console.log(error);
+        }
       }}
     >
       {({handleChange, handleSubmit}) => (

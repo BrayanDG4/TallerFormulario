@@ -1,12 +1,19 @@
 import {pool} from '../config/conexion.js';
 
-export const createCandidate = (req, res) => {
+export const createCandidate = async (req, res) => {
 
-    try{
-        pool.query('');
-        res.send('Registro completo');
+    try {
+        const {document, } = req.body;
+        const [result] = await pool.query(
+            "INSERT INTO acudiente (idAcudiente, Nombre, Telefono) VALUES (?, NULL, NULL)",
+            [document]
+        );
+        res.json({
+            id: result.insertId,
+            document
+        });
     } catch (error) {
-        return res.status(500).json({message: error.message});
+        console.log(error);
     }
     
 }
