@@ -7,24 +7,3 @@ export const pool = createPool({
     password:'bd#1234',
     database:'mydb'
 });
-
-
-
-// var conexion = mysql.createConnection({
-//     host: 'localhost',
-//     user:'root',
-//     password:'bd#1234',
-//     database:'mydb'
-// });
-
-// conexion.connect(
-//     (error)=>{
-//         if (!error) {
-//             console.log('Conexión establecida');
-//         } else{
-//             console.log(error);
-//         }
-//     }
-// );
-
-// module.exports=conexion;

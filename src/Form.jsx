@@ -64,6 +64,7 @@ const Form = () => {
         otherGender: false,
       });
     }
+    
   };
 
   //Si es estrato 1 o 2 el estudiante tiene derecho a matricula cero
@@ -144,6 +145,16 @@ const Form = () => {
     <Formik
       initialValues={{
         document: "",
+        name: "",
+        genderBox: "",
+        Date: "",
+        maritalStatus: "",
+        sons: "",
+        currentJob: "",
+        stratum: "",
+        otherGender: "",
+        partner: "",
+
       }}
       onSubmit = {async (values)=>{
         console.log(values);
@@ -190,6 +201,7 @@ const Form = () => {
             </label>
 
             <input
+              onChange={handleChange}
               required
               name="name"
               type="text"
@@ -213,11 +225,11 @@ const Form = () => {
               name="genderBox"
               id="genderBox"
             >
-              <option value="Femenino" selected>
+              <option value="1" selected>
                 Femenino
               </option>
-              <option value="Masculino">Másculino</option>
-              <option id="other" value="otro">
+              <option value="2">Másculino</option>
+              <option id="other" value="3">
                 Otro
               </option>
             </select>
@@ -233,7 +245,7 @@ const Form = () => {
               </label>
 
               <input
-                name="gender"
+                name="otherGender"
                 type="text"
                 id="gender"
                 placeholder="Género"
@@ -255,6 +267,7 @@ const Form = () => {
               data-mdb-toggle-button="false"
             >
               <input
+                name="Date"
                 className="border p-3 w-full rounded-lg invalid:border-pink-500"
                 type="date"
                 onChange={handleChangeDate}
@@ -276,7 +289,7 @@ const Form = () => {
             </label>
             <input
               required
-              name="name"
+              name="age"
               value={edad}
               disabled
               type="number"
@@ -297,7 +310,7 @@ const Form = () => {
                 </label>
                 <input
                   required
-                  name="name"
+                  name="nameAcudent"
                   type="text"
                   id="text"
                   placeholder=""
@@ -314,7 +327,7 @@ const Form = () => {
                 </label>
                 <input
                   required
-                  name="name"
+                  name="phoneAcudent"
                   type="number"
                   id="name"
                   placeholder=""
@@ -338,12 +351,12 @@ const Form = () => {
               className="mb-2 block text-gray-500 font-bold w-full p-3 rounded"
               name="maritalStatus"
             >
-              <option value="Femenino" selected>
+              <option value="1" selected>
                 Soltero
               </option>
-              <option value="Masculino">Casado</option>
-              <option id="maritalStatus" value="union-libre">
-                Unión libre
+              <option value="2">Union libre</option>
+              <option id="maritalStatus" value="3">
+                Casado
               </option>
             </select>
           </div>
